@@ -18,6 +18,8 @@ tasks:
 
         yarn install
 
+        ./public/lib/.bin/webpack-dev-server
+
       command: >
           passenger start
 
