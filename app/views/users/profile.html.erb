@@ -34,8 +34,7 @@
   </div>
 
   <br />
-
-  <%= render :partial => "tag/profileCard" %>
+  <%= render :partial => "tag/profileCard", :locals => {:auth => @auth} %>
 
   <div class="text-center"> <%= will_paginate @tags, :renderer => WillPaginate::ActionView::BootstrapLinkRenderer if @paginated %></div>
 

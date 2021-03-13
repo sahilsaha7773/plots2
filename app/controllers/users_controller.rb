@@ -146,12 +146,17 @@ class UsersController < ApplicationController
   end
 
   def profile
+      
+    
     if current_user && params[:id].nil?
       redirect_to "/profile/#{current_user.username}"
     elsif !current_user && params[:id].nil?
       redirect_to "/"
     else
       @profile_user = User.find_by(username: params[:id])
+      if current_user && current_user.uid == @profile_user.uid
+        @auth = true
+      end
       if !@profile_user
         flash[:error] = I18n.t('users_controller.no_user_found_name', username: params[:id])
         redirect_to "/"
