@@ -146,8 +146,6 @@ class UsersController < ApplicationController
   end
 
   def profile
-      
-    
     if current_user && params[:id].nil?
       redirect_to "/profile/#{current_user.username}"
     elsif !current_user && params[:id].nil?

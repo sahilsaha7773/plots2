@@ -74,6 +74,8 @@
                var place_name = data.items[i].place_name;
                var url = data.items[i].doc_url;
                var title = data.items[i].doc_title;
+               var lat = data.items[i].latitude;
+               var lon = data.items[i].longitude;
                var author = data.items[i].doc_author;
                var image_url = data.items[i].doc_image_url;
                var map_marker = PLmarker_default('blue');
@@ -86,6 +88,8 @@
 
                if(markers_hash.has(mid) === false){
                   var popup_content = "";
+                  popup_content+= "<p>Latitude: "+lat+"<br/>Longitude: "+lon+"</p>";
+                  
                   if (image_url) popup_content += "<img src='" + image_url + "' class='popup-thumb' />";
                   popup_content += "<h5><a href='" + url + "'>" + limit_words(title, 10)  + "</a></h5>";
                   popup_content += "<div class='popup-two-column'>";

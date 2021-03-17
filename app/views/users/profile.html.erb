@@ -18,6 +18,20 @@
   <a class="ml-2" href = "/tag/question:*/author/<%= params[:id] %>"><%= Node.questions.where(status: 1, uid: @profile_user.id).length %> questions </a></h5>
   </div>
 
+  <% if @auth %> 
+    <p style="width: 100%; text-align: center; border-bottom: 1px solid #ccc; line-height:2px; margin: 21px 0 20px;">
+      <span style="background-color: #fff; padding: 0 10px; color: #808080;">
+        <h7>Drafts</h7>
+      </span>
+    </p>
+    <% Tag.find_draft_notes().each do |node|  %>
+      <div style="margin:20px 0px 20px 0px; border: 1px solid #dfdfdf; padding: 20px">
+        <%= render :partial  => "dashboard/node_default", :locals => {:node => node} %>
+      </div>
+      
+    <% end %> 
+  <% end %>
+
   <p style="width: 100%; text-align: center; border-bottom: 1px solid #ccc; line-height:2px; margin: 21px 0 20px;">
     <span style="background-color: #fff; padding: 0 10px; color: #808080;">
       <h7>Most Common Tags</h7>

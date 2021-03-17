@@ -116,24 +116,16 @@ class Tag < ApplicationRecord
         .order(order)
   end
   
-  def self.find_draft_notes(tagnames, limit = 10)
+  def self.find_draft_notes()
     nodes = Node.where(status: 3, type: 'note')
                 .includes(:tag)
                 .references(:term_data)
-                .where('term_data.name IN (?)', tagnames)
-                ags = Tag.where('term_data.name IN (?)', tagnames)
-    tags = Tag.where('term_data.name IN (?)', tagnames)
-    parents = Node.where(status: 3, type: 'note')
-                  .includes(:tag)
-                  .references(:term_data)
-                  .where('term_data.name IN (?)', tags.collect(&:parent))
     order = 'node_revisions.timestamp DESC'
     order = 'created DESC'
-    Node.where('node.nid IN (?)', (nodes + parents).collect(&:nid))
+    Node.where('node.nid IN (?)', (nodes).collect(&:nid))
         .includes(:revision, :tag)
         .references(:node_revisions)
         .where(status: 3)
-        .limit(limit)
         .order(order)
   end
   # just like find_nodes_by_type, but searches wiki pages, places, and tools

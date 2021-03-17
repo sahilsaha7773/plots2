@@ -1,6 +1,4 @@
-<%= render :partial => "tag/draft_notes" %>
 <div class="card-view profile-card">
-
 <% @profile_user.normal_tags.each do |tag| %>
   <div class="card shadow-sm p-2 mb-3 bg-white rounded" >
     <div class="card-header mt-2">
@@ -19,22 +17,6 @@
           &nbsp; by @<%= node.author.name %>
         </div>
       <% end %>
-      
-      <% if auth %> 
-        <p>Drafts</p>
-        <% Tag.find_draft_notes(tag.name, limit = 3).each do |node|  %>
-          <div class="posted-by-links">
-            <% if node.main_image %>
-              <img class="rounded-circle" id="profile-photo" style="width:20px; height:20px; margin-right:8px; display: inline-block;" src="<%= node.main_image.path(:default) %>" />
-            <% elsif node.scraped_image %>
-              <img class="rounded-circle" id="profile-photo" style="width:20px; height:20px; margin-right:8px; display: inline-block;" src="<%= node.scraped_image %>" />
-            <% end %>
-            <a class="post-title" <% if @widget %>target="_blank"<% end %> href="<%= node.path %>"><%= (node.type == 'note') ? node.title : node.latest.title %></a>
-            &nbsp; by @<%= node.author.name %>
-          </div>
-        <% end %> 
-      <% end %>
-      
     </div>
     <div class="card-footer row align-items-center">
       <div class="col-12 col-xl-auto">
